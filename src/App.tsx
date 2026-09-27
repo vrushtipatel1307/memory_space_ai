@@ -267,7 +267,7 @@ function Reconstruction({ memory, ai, loading, error, onRetry, onClose }: { memo
 function MemoryDetail({ memory, familyMemories, onClose, onOpenMemory, onReconstruct }: { memory: Memory; familyMemories: Memory[]; onClose: () => void; onOpenMemory: (memory: Memory) => void; onVoiceSave?: (voice: { title: string; duration: string }) => void; onReconstruct: () => void }) {
   const [askOpen, setAskOpen] = useState(false)
   return <motion.div className="memory-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}><motion.section className="memory-detail" initial={{ y: 50, scale: 0.97 }} animate={{ y: 0, scale: 1 }} exit={{ y: 50, scale: 0.97 }} transition={{ type: 'spring', stiffness: 180, damping: 24 }}>
-    <button className="close-button" onClick={onClose} aria-label="Close memory"><X size={20} /></button><div className="detail-photo"><img src={memory.image} alt={memory.title} /><span className="photo-year">{memory.year}</span></div><div className="detail-copy"><p className="eyebrow"><ImageIcon size={13} />A memory held close</p><h2>{memory.title}</h2><div className="detail-facts"><span><MapPin size={15} />{memory.location}</span><span><CalendarDays size={15} />{memory.year}</span></div><div className="people-row"><Users size={15} /><span>{memory.people.map((person) => <span key={person}>{person}</span>)}</span></div><p className="story">{memory.story}</p>{memory.ai && <AIOrganizedCard ai={memory.ai} />}{memory.voice && <VoicePlayback voice={memory.voice} />}<div className="ai-actions"><button onClick={() => setAskOpen(true)}><MessageCircle size={14} />Ask About This Memory</button><button onClick={onReconstruct}><WandSparkles size={14} />Reconstruct Memory</button></div></div>
+    <button className="close-button" onClick={onClose} aria-label="Close memory"><X size={20} /></button><div className="detail-photo"><img src={memory.image} alt={memory.title} /><span className="photo-year">{memory.year}</span></div><div className="detail-copy"><p className="eyebrow"><ImageIcon size={13} />A memory held close</p><h2>{memory.title}</h2><div className="detail-facts"><span><MapPin size={15} />{memory.location}</span><span><CalendarDays size={15} />{memory.year}</span></div><div className="people-row"><Users size={15} /><span>{memory.people.map((person, index) => <span key={`${person}-${index}`}>{person}</span>)}</span></div><p className="story">{memory.story}</p>{memory.ai && <AIOrganizedCard ai={memory.ai} />}{memory.voice && <VoicePlayback voice={memory.voice} />}<div className="ai-actions"><button onClick={() => setAskOpen(true)}><MessageCircle size={14} />Ask About This Memory</button><button onClick={onReconstruct}><WandSparkles size={14} />Reconstruct Memory</button></div></div>
   </motion.section>{askOpen && <AskMemory memory={memory} familyMemories={familyMemories} onClose={() => setAskOpen(false)} onOpenMemory={onOpenMemory} />}</motion.div>
 }
 
@@ -523,7 +523,7 @@ function App() {
       console.info('[Supabase] Organizer result saved to the memory record.')
     } catch (error) {
       console.error('[AI] Memory reconstruction failed.', error)
-      setReconstructionError(error instanceof Error ? error.message : 'Could not organize this memory.')
+      setReconstructionError(error instanceof TypeError ? 'Could not reach the memory organizer. Restart the app using npm run dev and try again.' : error instanceof Error ? error.message : 'Could not organize this memory.')
     } finally { setReconstructionLoading(false) }
   }
 

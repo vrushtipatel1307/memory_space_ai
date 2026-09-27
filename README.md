@@ -1,4 +1,4 @@
-# MemorySpace
+﻿# MemorySpace
 
 MemorySpace is a shared home for the moments, stories, and people that make up a life. Save memories in one visual space, and revisit them anytime — alone or with the people who matter to you.
 
