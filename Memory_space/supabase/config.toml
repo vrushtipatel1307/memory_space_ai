@@ -1,0 +1,4 @@
+project_id = "tcattxykshmnpunktvbq"
+
+[functions.send-group-invitation]
+verify_jwt = true

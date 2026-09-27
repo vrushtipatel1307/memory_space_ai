@@ -1,0 +1,39 @@
+{
+  "name": "memoryspace",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "server": "tsx server/index.ts",
+    "db:migrate": "node scripts/apply-supabase-migration.mjs",
+    "build": "tsc -b && vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "@react-three/fiber": "^9.3.0",
+    "@supabase/supabase-js": "^2.117.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.468.0",
+    "pg": "^8.23.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.5",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7"
+  }
+}
